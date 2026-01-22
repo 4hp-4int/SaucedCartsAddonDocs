@@ -1,7 +1,5 @@
-SaucedCarts Documentation License
+SaucedCarts Addon Documentation License
 Copyright (c) 2025 4hp-4int
-
-This documentation is part of the SaucedCarts project.
 
 PERMITTED
 - Viewing and reading for learning purposes
@@ -10,9 +8,10 @@ PERMITTED
 
 NOT PERMITTED
 - Redistributing this documentation
-- Copying substantial portions into other projects
-- Hosting mirrors or copies elsewhere
+- Copying substantial portions into other projects or documentation
+- Hosting mirrors, forks, or copies elsewhere
 - Creating derivative works
 
-For the full license terms, see:
-https://github.com/4hp-4int/SaucedCarts/blob/main/LICENSE
+This documentation is provided "as is" without warranty of any kind.
+
+For permissions beyond this license, contact the copyright holder.
