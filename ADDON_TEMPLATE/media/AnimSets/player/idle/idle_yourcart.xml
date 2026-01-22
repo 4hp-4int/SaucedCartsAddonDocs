@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    IDLE ANIMATION TEMPLATE FOR CUSTOM CARTS
+
+    CRITICAL: m_ConditionPriority MUST be set to ensure your animation node
+    wins over vanilla nodes. Without this, both your node AND vanilla Idle
+    can activate simultaneously, blocking movement transitions!
+
+    x_extends works against VANILLA files (loaded first by the game).
+    DO NOT copy vanilla files to your mod - they will be skipped!
+-->
+<animNode x_extends="Idle.xml">
+    <m_Name>IdleYourCart</m_Name>
+    <m_AnimName>Bob_YourCart_Idle</m_AnimName>
+
+    <!-- CRITICAL: Priority settings to win over vanilla nodes -->
+    <m_Priority>10</m_Priority>
+    <m_ConditionPriority>10</m_ConditionPriority>
+
+    <m_SpeedScale>1.0</m_SpeedScale>
+
+    <!-- Root motion axis: Z reads Y-forward from Blender exports -->
+    <m_deferredBoneAxis>Z</m_deferredBoneAxis>
+
+    <!-- 3 blend nodes for idle state -->
+    <m_2DBlends referenceID="1">
+        <m_AnimName>Bob_YourCart_Idle</m_AnimName>
+        <m_XPos>0.00</m_XPos>
+        <m_YPos>0.00</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlends referenceID="2">
+        <m_AnimName>Bob_YourCart_Idle</m_AnimName>
+        <m_XPos>0.00</m_XPos>
+        <m_YPos>1.00</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlends referenceID="3">
+        <m_AnimName>Bob_YourCart_Idle</m_AnimName>
+        <m_XPos>0.00</m_XPos>
+        <m_YPos>0.04</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+
+    <m_Conditions>
+        <m_Name>Weapon</m_Name>
+        <m_Type>STRING</m_Type>
+        <m_Value>yourcart</m_Value>
+    </m_Conditions>
+
+    <m_Transitions>
+        <m_Target>walkYourCart</m_Target>
+        <!-- Optional: Add m_AnimName for IdleToWalk bridge animation -->
+        <!-- <m_AnimName>Bob_YourCart_IdleToWalk</m_AnimName> -->
+        <m_blendInTime>0.1</m_blendInTime>
+        <m_blendOutTime>0.1</m_blendOutTime>
+    </m_Transitions>
+    <m_Transitions>
+        <m_Target>runYourCart</m_Target>
+        <m_blendInTime>0.1</m_blendInTime>
+    </m_Transitions>
+    <m_Transitions>
+        <m_Target>sprintYourCart</m_Target>
+        <m_blendInTime>0.1</m_blendInTime>
+    </m_Transitions>
+</animNode>

@@ -1,0 +1,23 @@
+# GitHub Pages Jekyll Configuration
+title: SaucedCarts Addon Documentation
+description: Documentation for creating addon carts for SaucedCarts
+theme: jekyll-theme-cayman
+
+# Only include addon-relevant files
+include:
+  - index.md
+  - ADDON_GUIDE.md
+  - ANIMSET_GUIDE.md
+  - ANIMSET_SYSTEM.md
+  - ANIMATION_XML_REFERENCE.md
+
+exclude:
+  - templates/
+  - ADDON_TEMPLATE/
+  - "*_PROOF.md"
+  - PZ_MODDING_REFERENCE.md
+  - MODEL_ATTACHMENTS.md
+  - ATTACHMENT_ANALYSIS.md
+  - VISUAL_TESTING.md
+  - MIGRATION_GUIDE.md
+  - STARLIT_COMPATIBILITY.md

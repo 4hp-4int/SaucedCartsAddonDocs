@@ -1,0 +1,125 @@
+[h1]SaucedCarts - Pushable Carts[/h1]
+
+Transport massive amounts of loot with pushable shopping carts! A clean, multiplayer-safe implementation built for Build 42.
+
+[img]https://i.imgur.com/PLACEHOLDER_BANNER.png[/img]
+
+[h2]Features[/h2]
+[list]
+[*] [b]Shopping Carts[/b] - Find them in grocery stores, malls, and supermarkets
+[*] [b]Massive Storage[/b] - 60 capacity with 95% weight reduction
+[*] [b]Two-Handed Push[/b] - Realistic cart-pushing animations
+[*] [b]Durability System[/b] - Carts wear down over time and can be repaired
+[*] [b]Movement Penalty[/b] - Trade speed for carrying capacity
+[*] [b]Multiplayer Safe[/b] - Fully synced, no duplication bugs
+[/list]
+
+[h2]How It Works[/h2]
+[olist]
+[*] Find a shopping cart in stores or malls
+[*] Right-click and select [b]"Push Cart"[/b]
+[*] Open the cart's inventory and load it up
+[*] Use [b]"Drop"[/b] when done to place the cart back on the ground
+[/olist]
+
+[b]Note:[/b] While pushing a cart, you cannot sneak or aim weapons. Drop the cart first!
+
+[h2]Cart Stats[/h2]
+[table]
+[tr][th]Stat[/th][th]Value[/th][/tr]
+[tr][td]Capacity[/td][td]60 units[/td][/tr]
+[tr][td]Weight Reduction[/td][td]95% (items weigh almost nothing inside)[/td][/tr]
+[tr][td]Movement Speed[/td][td]70% of normal[/td][/tr]
+[tr][td]Base Weight[/td][td]8 kg[/td][/tr]
+[tr][td]Durability[/td][td]100 (repairable with scrap metal)[/td][/tr]
+[/table]
+
+[h2]Sandbox Options[/h2]
+[list]
+[*] [b]Enable Mod[/b] - Toggle the mod on/off
+[*] [b]Spawn Rate[/b] - Adjust how often carts appear (0-200%)
+[*] [b]Capacity Multiplier[/b] - Scale cart storage capacity
+[*] [b]Durability Multiplier[/b] - Scale cart durability
+[/list]
+
+[h2]Compatibility[/h2]
+[list]
+[*] [b]Build 42.13.1+[/b] required
+[*] Works in [b]Singleplayer[/b] and [b]Multiplayer[/b]
+[*] Safe to add to existing saves
+[*] No known mod conflicts
+[/list]
+
+[hr][/hr]
+
+[h1]For Modders: Add Your Own Carts![/h1]
+
+SaucedCarts provides a simple API for other mods to add custom cart types. Your carts automatically get all the features - context menus, animations, MP sync, durability, and world spawning.
+
+[h2]Quick Example[/h2]
+[code]
+-- In your mod's shared/init.lua
+SaucedCarts.registerCart("MyMod.Wheelbarrow", {
+    name = "Wheelbarrow",
+    capacity = 40,
+    weightReduction = 80,
+    runSpeedModifier = 0.80,
+    spawnLocations = {"GardenStoreMisc", "FarmStorageShed"},
+})
+[/code]
+
+That's it! Your wheelbarrow now works with all SaucedCarts systems.
+
+[h2]What You Provide[/h2]
+[list]
+[*] 3D model (FBX) and texture
+[*] Item definition (items_*.txt)
+[*] Model definition (models_*.txt)
+[*] Lua registration (one function call)
+[/list]
+
+[h2]What SaucedCarts Handles[/h2]
+[list]
+[*] Right-click context menus
+[*] Two-handed equipping
+[*] Push/drop animations
+[*] Container storage system
+[*] Durability and repairs
+[*] Multiplayer synchronization
+[*] World spawning
+[/list]
+
+[h2]Resources[/h2]
+[list]
+[*] [b]Template Mod[/b] - Download includes a complete working template in [i]docs/ADDON_TEMPLATE/[/i]
+[*] [b]Full Documentation[/b] - See [i]docs/ADDON_GUIDE.md[/i] for step-by-step instructions
+[*] [b]Asset Guide[/b] - See [i]ASSET_REQUIREMENTS.md[/i] for 3D model specs
+[/list]
+
+[hr][/hr]
+
+[h2]Debug Commands[/h2]
+For testing (requires debug mode or admin):
+[code]
+SaucedCartsDebug.spawnCart("ShoppingCart")  -- Spawn cart at player
+SaucedCartsDebug.listRegistered()           -- List all cart types
+SaucedCartsDebug.showStatus()               -- Show held cart info
+[/code]
+
+[h2]Known Issues[/h2]
+[list]
+[*] None currently - please report bugs in the comments!
+[/list]
+
+[h2]Credits[/h2]
+[list]
+[*] [b]Dark Sauce[/b] - Code and design
+[*] Inspired by ZuperCarts (rebuilt from scratch to fix MP issues)
+[/list]
+
+[h2]Source Code[/h2]
+This mod is open source. Contributions welcome!
+
+[hr][/hr]
+
+[i]If you enjoy this mod, please rate and favorite! It helps others find it.[/i]

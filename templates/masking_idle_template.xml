@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MASKING ANIMATION TEMPLATE: IDLE HAND POSITION
+
+    Usage:
+    1. Copy to media/AnimSets/player/maskingright/
+    2. Rename to holding<yourtype>right.xml
+    3. Replace all PLACEHOLDER values
+    4. Update transitions to match your other masking states
+
+    Note: Masking animations overlay on top of body animations,
+    affecting only the bones specified in m_SubStateBoneWeights.
+-->
+<animNode>
+    <!-- Mask name - this is set via setVariable("RightHandMask", "name") -->
+    <m_Name>holding__PLACEHOLDER_TYPE__right</m_Name>
+
+    <!-- Animation to use for hand position (usually same as idle body anim) -->
+    <m_AnimName>Bob_Idle__PLACEHOLDER_TYPE__</m_AnimName>
+
+    <m_deferredBoneAxis>Y</m_deferredBoneAxis>
+    <m_Priority>10</m_Priority>
+    <m_ConditionPriority>10</m_ConditionPriority>
+    <m_speedScale>1.0</m_speedScale>
+    <m_BlendTime>0.050</m_BlendTime>
+
+    <!-- CONDITION: When RightHandMask variable equals this value -->
+    <m_Conditions>
+        <m_Name>RightHandMask</m_Name>
+        <m_Type>STRING</m_Type>
+        <m_StringValue>holding__PLACEHOLDER_TYPE__right</m_StringValue>
+    </m_Conditions>
+
+    <!-- TRANSITIONS: To other masking states -->
+
+    <!-- Idle -> Walk masking -->
+    <m_Transitions>
+        <m_Target>walk__PLACEHOLDER_TYPE__right</m_Target>
+        <m_blendInTime>0.05</m_blendInTime>
+        <m_blendOutTime>0.05</m_blendOutTime>
+    </m_Transitions>
+
+    <!-- Idle -> Run masking -->
+    <m_Transitions>
+        <m_Target>run__PLACEHOLDER_TYPE__right</m_Target>
+        <m_blendInTime>0.05</m_blendInTime>
+        <m_blendOutTime>0.05</m_blendOutTime>
+    </m_Transitions>
+
+    <!-- Idle -> Sprint masking -->
+    <m_Transitions>
+        <m_Target>sprint__PLACEHOLDER_TYPE__right</m_Target>
+        <m_blendInTime>0.05</m_blendInTime>
+        <m_blendOutTime>0.05</m_blendOutTime>
+    </m_Transitions>
+
+    <!-- BONE WEIGHTS: Which bones this animation affects -->
+    <!-- These bones will be overridden by this masking animation -->
+    <m_SubStateBoneWeights>
+        <boneName>Bip01</boneName>
+        <weight>1.00</weight>
+    </m_SubStateBoneWeights>
+    <m_SubStateBoneWeights>
+        <boneName>Bip01_R_Clavicle</boneName>
+        <!-- Right shoulder and all children (arm, hand) -->
+    </m_SubStateBoneWeights>
+    <m_SubStateBoneWeights>
+        <boneName>Bip01_Prop1</boneName>
+        <!-- Primary attachment point (cart handle) -->
+    </m_SubStateBoneWeights>
+    <m_SubStateBoneWeights>
+        <boneName>Bip01_Prop2</boneName>
+        <!-- Secondary attachment point -->
+    </m_SubStateBoneWeights>
+</animNode>

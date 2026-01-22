@@ -1,0 +1,16 @@
+MODEL TEXTURE REQUIREMENTS
+==========================
+
+Place your cart's texture PNG file here, named to match models_mycartaddon.txt.
+
+For the example cart, create:
+  mycart.png
+
+Specifications:
+- Size: 512x512 or 1024x1024 pixels
+- Format: PNG (transparency optional)
+- UV Layout: Must match your FBX model's UV unwrap
+
+This texture is applied to:
+- The 3D model when held by player
+- The 3D model when placed on ground

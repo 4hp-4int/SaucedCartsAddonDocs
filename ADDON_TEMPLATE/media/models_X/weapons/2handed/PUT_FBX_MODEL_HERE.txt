@@ -1,0 +1,25 @@
+3D MODEL REQUIREMENTS
+=====================
+
+Place your cart's FBX model file here, named to match models_mycartaddon.txt.
+
+For the example cart, create:
+  mycart.fbx
+
+Model Specifications:
+- Format: FBX (2014 or later)
+- Scale: Model should be game-scale (roughly 1 unit = 1 meter)
+- Origin: Center-bottom of cart
+- Orientation: Front of cart facing +Y axis
+- Submesh naming: The mesh object name in Blender becomes the submesh name
+  - In models_mycartaddon.txt: mesh = weapons/2handed/mycart|cart
+  - The "cart" after the pipe is the submesh name from Blender
+
+Blender Export Settings:
+- Scale: 1.0
+- Forward: -Z Forward
+- Up: Y Up
+- Check "Apply Modifiers"
+- Check "Apply Transform"
+
+See ASSET_REQUIREMENTS.md in the SaucedCarts mod for detailed specifications.

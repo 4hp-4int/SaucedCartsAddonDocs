@@ -1,0 +1,17 @@
+INVENTORY ICON REQUIREMENTS
+===========================
+
+Place your inventory icon PNG file here, named to match your item's Icon field.
+
+For the example cart "MyCart", create:
+  Item_MyCart.png
+
+Specifications:
+- Size: 32x32 pixels (or 64x64 for high-res)
+- Format: PNG with transparency
+- Style: Match PZ's inventory icon style (top-down view, simple shading)
+
+The icon appears in:
+- Player inventory
+- Loot containers
+- Crafting menus

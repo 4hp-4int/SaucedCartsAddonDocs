@@ -1,0 +1,57 @@
+-- ============================================================================
+-- MyCartAddon Model Definitions
+-- ============================================================================
+-- This file maps your 3D models to the item definitions.
+-- IMPORTANT: Models MUST be in the "Base" module, NOT your mod's module!
+-- ============================================================================
+
+module Base
+{
+    -- ========================================================================
+    -- EXAMPLE MODEL: MyCartModel
+    -- ========================================================================
+    -- This model name must match the StaticModel/WorldStaticModel in items_*.txt
+
+    model MyCartModel
+    {
+        -- Path to your FBX file (without extension)
+        -- Format: folder/subfolder/filename|submeshname
+        -- The submesh name comes from your Blender object naming
+        mesh = weapons/2handed/mycart|cart,
+
+        -- Path to your texture PNG (without extension)
+        texture = weapons/2handed/mycart,
+
+        -- Scale factor for hand-held view (0.3 is typical for carts)
+        scale = 0.3,
+
+        -- Mirror the model horizontally (usually true for carts)
+        invertX = true,
+
+        -- World attachment: position/rotation when cart is on the ground
+        attachment world
+        {
+            -- X Y Z position offset from center of tile
+            offset = 0.0000 0.0000 0.0000,
+            -- X Y Z rotation in degrees
+            rotate = 0.0000 90.0000 0.0000,
+        }
+    }
+}
+
+-- ============================================================================
+-- ASSET FILE LOCATIONS
+-- ============================================================================
+-- Your model and texture files should be placed at:
+--
+-- 3D Model (FBX):
+--   media/models_x/weapons/2handed/mycart.fbx
+--
+-- Texture (PNG):
+--   media/textures/weapons/2handed/mycart.png
+--
+-- Inventory Icon (PNG, 32x32 or 64x64):
+--   media/textures/Item_MyCart.png
+--
+-- See ADDON_GUIDE.md for detailed asset requirements.
+-- ============================================================================

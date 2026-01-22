@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    BODY ANIMATION TEMPLATE: RUN STATE
+
+    Usage:
+    1. Copy to media/AnimSets/player/run/
+    2. Rename to run_<yourtype>.xml
+    3. Replace all PLACEHOLDER values
+    4. Update transitions to match your other states
+-->
+<animNode>
+    <!-- State name - referenced by transitions from other states -->
+    <m_Name>run__PLACEHOLDER_TYPE__</m_Name>
+
+    <!-- Animation name - must match AnimationSet name in your .X file -->
+    <m_AnimName>Bob_Run__PLACEHOLDER_TYPE__</m_AnimName>
+
+    <m_deferredBoneAxis>Y</m_deferredBoneAxis>
+    <m_Priority>10</m_Priority>
+    <m_ConditionPriority>10</m_ConditionPriority>
+    <m_SpeedScale>0.80</m_SpeedScale>
+    <m_BlendTime>0.10</m_BlendTime>
+
+    <!-- Scalars for movement speed -->
+    <m_Scalar>WalkInjury</m_Scalar>
+    <m_Scalar2>WalkSpeed</m_Scalar2>
+
+    <!-- CONDITION: When Weapon variable equals this value, use this animation -->
+    <m_Conditions>
+        <m_Name>Weapon</m_Name>
+        <m_Type>STRING</m_Type>
+        <m_StringValue>__PLACEHOLDER_WEAPON_VALUE__</m_StringValue>
+    </m_Conditions>
+
+    <!-- 2D Blend space for directional movement -->
+    <m_2DBlends referenceID="1">
+        <m_AnimName>Bob_Run__PLACEHOLDER_TYPE__</m_AnimName>
+        <m_XPos>0.00</m_XPos>
+        <m_YPos>1.00</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlends referenceID="2">
+        <m_AnimName>Bob_Run__PLACEHOLDER_TYPE__</m_AnimName>
+        <m_XPos>0.00</m_XPos>
+        <m_YPos>0.00</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlends referenceID="3">
+        <m_AnimName>Bob_Run__PLACEHOLDER_TYPE__</m_AnimName>
+        <m_XPos>-0.50</m_XPos>
+        <m_YPos>0.50</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlends referenceID="4">
+        <m_AnimName>Bob_Run__PLACEHOLDER_TYPE__</m_AnimName>
+        <m_XPos>0.50</m_XPos>
+        <m_YPos>0.50</m_YPos>
+        <m_SpeedScale>0.80</m_SpeedScale>
+    </m_2DBlends>
+    <m_2DBlendTri>
+        <node1>2</node1>
+        <node2>3</node2>
+        <node3>1</node3>
+    </m_2DBlendTri>
+    <m_2DBlendTri>
+        <node1>2</node1>
+        <node2>1</node2>
+        <node3>4</node3>
+    </m_2DBlendTri>
+
+    <!-- TRANSITIONS: Define paths to other states -->
+
+    <!-- Run -> Idle -->
+    <m_Transitions>
+        <m_Target>Idle__PLACEHOLDER_TYPE__</m_Target>
+        <m_AnimName>Bob_Walk__PLACEHOLDER_TYPE__</m_AnimName>
+        <m_blendInTime>0.03</m_blendInTime>
+        <m_blendOutTime>0.03</m_blendOutTime>
+        <m_speedScale>0.5</m_speedScale>
+        <m_Priority>15</m_Priority>
+    </m_Transitions>
+
+    <!-- Run -> Walk -->
+    <m_Transitions>
+        <m_Target>walk__PLACEHOLDER_TYPE__</m_Target>
+        <m_blendInTime>0.1</m_blendInTime>
+    </m_Transitions>
+
+    <!-- Run -> Sprint -->
+    <m_Transitions>
+        <m_Target>sprint__PLACEHOLDER_TYPE__</m_Target>
+        <m_AnimName>Bob_Sprint___PLACEHOLDER_TYPE__</m_AnimName>
+        <m_blendInTime>0.5</m_blendInTime>
+        <m_blendOutTime>0.5</m_blendOutTime>
+        <m_Priority>15</m_Priority>
+    </m_Transitions>
+
+    <!-- EVENTS: Footstep sounds -->
+    <m_Events>
+        <m_EventName>Footstep</m_EventName>
+        <m_TimePc>0.15</m_TimePc>
+        <m_ParameterValue>run</m_ParameterValue>
+    </m_Events>
+    <m_Events>
+        <m_EventName>Footstep</m_EventName>
+        <m_TimePc>0.6</m_TimePc>
+        <m_ParameterValue>run</m_ParameterValue>
+    </m_Events>
+</animNode>
