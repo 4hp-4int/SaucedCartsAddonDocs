@@ -25,7 +25,4 @@ Create custom carts for Project Zomboid Build 42 using the SaucedCarts framework
 | [Model Attachments](MODEL_ATTACHMENTS.md) | How to configure model attachment points |
 | [Visual Testing](VISUAL_TESTING.md) | Testing fill state visuals in-game |
 
-## Links
 
-- [SaucedCarts on GitHub](https://github.com/4hp-4int/SaucedCarts)
-- [SaucedCarts on Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=YOUR_WORKSHOP_ID)
