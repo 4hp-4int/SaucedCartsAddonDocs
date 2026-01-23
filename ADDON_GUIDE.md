@@ -1225,5 +1225,4 @@ end
 ## Questions?
 
 - Check the SaucedCarts workshop page for updates
-- See `ASSET_REQUIREMENTS.md` for detailed 3D asset specifications
 - Use `SaucedCartsDebug.testRegistration()` to verify the API works correctly
