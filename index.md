@@ -34,8 +34,7 @@ Create custom carts for Project Zomboid Build 42 using the SaucedCarts framework
 
 ## Quick Links
 
-- [GitHub Repository](https://github.com/4hp-4int/SaucedCarts)
-- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=YOUR_WORKSHOP_ID)
+- [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=3651954650)
 
 ## Template
 
