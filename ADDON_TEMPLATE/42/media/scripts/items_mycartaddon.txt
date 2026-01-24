@@ -1,0 +1,27 @@
+module MyCartAddon
+{
+    imports {Base}
+
+    item MyCart
+    {
+        DisplayCategory = Container,
+        DisplayName = My Custom Cart,
+        ItemType = base:container,
+        Weight = 5.0,
+        Icon = MyCart,
+        Capacity = 50,
+        WeightReduction = 90,
+        RunSpeedModifier = 0.75,
+        RequiresEquippedBothHands = true,
+        ConditionMax = 100,
+        ConditionLowerChance = 25,
+        CloseSound = CloseBag,
+        OpenSound = OpenBag,
+        PutInSound = PutItemInBag,
+        Tags = SaucedCart,
+        StaticModel = MyCart,
+        WorldStaticModel = MyCart,
+        ReplaceInPrimaryHand = MyCart holdingcartright,
+        ReplaceInSecondHand = MyCart holdingcartleft,
+    }
+}

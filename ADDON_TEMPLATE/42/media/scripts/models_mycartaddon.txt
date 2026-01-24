@@ -1,0 +1,55 @@
+module Base
+{
+    model MyCart
+    {
+        mesh = weapons/2handed/mycart|mycart,
+        texture = weapons/2handed/mycart,
+        scale = 1.00,
+        invertX = true,
+
+        /* World placement (on ground) */
+        attachment world
+        {
+            offset = 0.0000 0.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        /* Primary hand (right) - attaches to Bip01_Prop1 bone */
+        attachment Bip01_Prop1
+        {
+            offset = -0.4800 0.4300 -0.0700,
+            rotate = 0.0 180.0 105.0,
+            scale = 0.9500,
+        }
+
+        /* Secondary hand (left) - attaches to Bip01_Prop2 bone */
+        attachment Bip01_Prop2
+        {
+            offset = -0.4800 0.4300 -0.0700,
+            rotate = 0.0 180.0 105.0,
+            scale = 0.9500,
+        }
+    }
+}
+
+/* ============================================================================
+   ASSET FILE LOCATIONS
+   ============================================================================
+   Your model and texture files should be placed at:
+
+   3D Model (FBX):
+     media/models_X/weapons/2handed/mycart.fbx
+
+   Texture (PNG):
+     media/textures/weapons/2handed/mycart.png
+
+   Inventory Icon (PNG, 32x32 or 64x64):
+     media/textures/Item_MyCart.png
+
+   NAMING: The model name (MyCart) must match:
+     - StaticModel/WorldStaticModel in items_*.txt
+     - ReplaceInPrimaryHand/ReplaceInSecondHand in items_*.txt
+     - The model block name here
+
+   Use SaucedCartsTweaker in-game to adjust offset/rotate/scale values.
+   ============================================================================ */

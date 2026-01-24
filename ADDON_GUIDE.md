@@ -56,26 +56,31 @@ Once registered, your cart automatically gets:
 
 ## File Structure
 
-Your addon mod should have this structure:
+Your addon mod should use the Workshop-style folder structure for Build 42:
 
 ```
 YourModName/
-├── mod.info                              # Mod metadata
-├── media/
-│   ├── scripts/
-│   │   ├── items_yourmod.txt             # Item definitions
-│   │   └── models_yourmod.txt            # Model mappings
-│   ├── lua/shared/YourModName/
-│   │   └── init.lua                      # Registration code
-│   ├── textures/
-│   │   ├── Item_YourCart.png             # Inventory icon (32x32)
-│   │   └── weapons/2handed/
-│   │       └── yourcart.png              # Model texture (512x512)
-│   └── models_X/weapons/2handed/
-│       └── yourcart.fbx                  # 3D model
+├── README.txt                            # Optional
+├── common/
+│   └── mod.info                          # Mod metadata
+└── 42/
+    └── media/
+        ├── lua/shared/YourModName/
+        │   └── init.lua                  # Registration code
+        ├── scripts/
+        │   ├── items_yourmod.txt         # Item definitions
+        │   └── models_yourmod.txt        # Model mappings
+        ├── models_X/weapons/2handed/
+        │   └── yourcart.fbx              # 3D model
+        └── textures/
+            ├── Item_YourCart.png         # Inventory icon (32x32)
+            └── weapons/2handed/
+                └── yourcart.png          # Model texture
 ```
 
 ### mod.info
+
+Place `mod.info` in the `common/` folder:
 
 ```
 name=Your Mod Name
@@ -83,11 +88,13 @@ id=YourModName
 description=Adds custom carts using SaucedCarts.
 poster=poster.png
 modversion=1.0.0
-versionmin=42.13.1
-require=SaucedCarts
+versionMin=42.13.1
+require=\SaucedCarts
 ```
 
-**Important**: The `require=SaucedCarts` line ensures SaucedCarts loads before your mod.
+**Important**: The `require=\SaucedCarts` line ensures SaucedCarts loads before your mod. The backslash prefix is required for Build 42.
+
+**Note**: If `require=` causes issues enabling your mod, you can remove it - the fallback queue in `init.lua` handles load order gracefully.
 
 ---
 
@@ -155,7 +162,7 @@ end
 
 ### Load Order Safety
 
-If your mod might load before SaucedCarts (shouldn't happen with `require=`), use this pattern:
+If your mod might load before SaucedCarts (shouldn't happen with `require=\SaucedCarts`), use this pattern:
 
 ```lua
 if SaucedCarts and SaucedCarts.registerCart then
@@ -231,9 +238,9 @@ When items are added to or removed from a cart, SaucedCarts calculates the fill 
 
 | Fill State | Fill Percentage | Model Used |
 |------------|-----------------|------------|
-| `empty` | 0-32% | Base model (e.g., `YourCartModel`) |
-| `partial` | 33-65% | Partial model (e.g., `YourCartPartialModel`) |
-| `full` | 66-100% | Full model (e.g., `YourCartFullModel`) |
+| `empty` | 0-32% | Base model (e.g., `YourCart`) |
+| `partial` | 33-65% | Partial model (e.g., `YourCartPartial`) |
+| `full` | 66-100% | Full model (e.g., `YourCartFull`) |
 
 ### Registering Custom Visual Models
 
@@ -243,48 +250,54 @@ Add `visualModels` to your registration to specify your cart's fill state models
 SaucedCarts.registerCart("YourMod.YourCart", {
     name = "Your Cart",
     visualModels = {
-        empty = "YourCartModel",
-        partial = "YourCartPartialModel",
-        full = "YourCartFullModel",
+        empty = "YourCart",
+        partial = "YourCartPartial",
+        full = "YourCartFull",
     },
 })
 ```
 
 ### Creating the Models
 
-You need to define three models in your `models_yourmod.txt`:
+You need to define three models in your `42/media/scripts/models_yourmod.txt`:
 
 ```lua
 module Base
 {
     -- Empty cart model (0-32% full)
-    model YourCartModel
+    model YourCart
     {
-        mesh = weapons/2handed/yourcart_empty|submesh,
+        mesh = weapons/2handed/yourcart_empty|yourcart,
         texture = weapons/2handed/yourcart,
-        scale = 0.3,
+        scale = 1.00,
         invertX = true,
-        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 90.0 0.0 }
+        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 0.0 0.0 }
+        attachment Bip01_Prop1 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
+        attachment Bip01_Prop2 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
     }
 
     -- Partially full cart model (33-65% full)
-    model YourCartPartialModel
+    model YourCartPartial
     {
-        mesh = weapons/2handed/yourcart_partial|submesh,
+        mesh = weapons/2handed/yourcart_partial|yourcart,
         texture = weapons/2handed/yourcart,
-        scale = 0.3,
+        scale = 1.00,
         invertX = true,
-        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 90.0 0.0 }
+        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 0.0 0.0 }
+        attachment Bip01_Prop1 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
+        attachment Bip01_Prop2 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
     }
 
     -- Full cart model (66%+ full)
-    model YourCartFullModel
+    model YourCartFull
     {
-        mesh = weapons/2handed/yourcart_full|submesh,
+        mesh = weapons/2handed/yourcart_full|yourcart,
         texture = weapons/2handed/yourcart,
-        scale = 0.3,
+        scale = 1.00,
         invertX = true,
-        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 90.0 0.0 }
+        attachment world { offset = 0.0 0.0 0.0, rotate = 0.0 0.0 0.0 }
+        attachment Bip01_Prop1 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
+        attachment Bip01_Prop2 { offset = -0.48 0.43 -0.07, rotate = 0.0 180.0 105.0, scale = 0.95 }
     }
 }
 ```
@@ -293,9 +306,9 @@ module Base
 
 If you don't specify `visualModels`, SaucedCarts attempts **convention-based naming**:
 
-1. Gets your item's `StaticModel` from items_*.txt (e.g., `WheelbarrowModel`)
-2. Strips the "Model" suffix to get base name (e.g., `Wheelbarrow`)
-3. Builds fill state names: `WheelbarrowModel`, `WheelbarrowPartialModel`, `WheelbarrowFullModel`
+1. Gets your item's `StaticModel` from items_*.txt (e.g., `Wheelbarrow`)
+2. Appends "Partial" and "Full" suffixes for fill states
+3. Builds fill state names: `Wheelbarrow`, `WheelbarrowPartial`, `WheelbarrowFull`
 
 For best results, **always specify `visualModels` explicitly** - it's more reliable and documents your intent.
 
@@ -305,9 +318,9 @@ If you only want one model regardless of fill state, specify the same model for 
 
 ```lua
 visualModels = {
-    empty = "YourCartModel",
-    partial = "YourCartModel",
-    full = "YourCartModel",
+    empty = "YourCart",
+    partial = "YourCart",
+    full = "YourCart",
 },
 ```
 
@@ -322,7 +335,7 @@ Visual states are automatically synchronized in multiplayer:
 
 ## Item Definitions
 
-Create `media/scripts/items_yourmod.txt`:
+Create `42/media/scripts/items_yourmod.txt`:
 
 ```lua
 module YourModName
@@ -331,78 +344,81 @@ module YourModName
 
     item YourCart
     {
-        -- Container settings (REQUIRED)
         DisplayCategory = Container,
-        Type = Container,
-
-        -- Display
         DisplayName = Your Cart Name,
+        ItemType = base:container,
+        Weight = 5.0,
         Icon = YourCart,
-
-        -- Container stats (should match registration)
         Capacity = 50,
         WeightReduction = 90,
-
-        -- Physical stats
-        Weight = 5.0,
         RunSpeedModifier = 0.75,
-
-        -- Durability
+        RequiresEquippedBothHands = true,
         ConditionMax = 100,
         ConditionLowerChance = 25,
-
-        -- CRITICAL: Required for two-handed equip
-        RequiresEquippedBothHands = true,
-
-        -- Sounds
         CloseSound = CloseBag,
         OpenSound = OpenBag,
         PutInSound = PutItemInBag,
-
-        -- Model connections (must match models_*.txt)
-        ReplaceInPrimaryHand = YourCartModel holdingcartright,
-        ReplaceInSecondHand = YourCartModel holdingcartleft,
-        StaticModel = YourCartModel,
-        WorldStaticModel = YourCartModel,
-
-        -- Tags
         Tags = SaucedCart,
+        StaticModel = YourCart,
+        WorldStaticModel = YourCart,
+        ReplaceInPrimaryHand = YourCart holdingcartright,
+        ReplaceInSecondHand = YourCart holdingcartleft,
     }
 }
 ```
 
 ### Critical Fields
 
-- `Type = Container` - Makes the item a container
+- `ItemType = base:container,` - Makes the item a container (Build 42 syntax)
 - `RequiresEquippedBothHands = true` - Enables two-handed equip
+- `StaticModel` / `WorldStaticModel` - Must match model name in models_*.txt
 - `ReplaceInPrimaryHand` / `ReplaceInSecondHand` - Connects to animations
 
 ---
 
 ## Model Definitions
 
-Create `media/scripts/models_yourmod.txt`:
+Create `42/media/scripts/models_yourmod.txt`:
 
 ```lua
 module Base
 {
-    model YourCartModel
+    model YourCart
     {
-        mesh = weapons/2handed/yourcart|submeshname,
+        mesh = weapons/2handed/yourcart|yourcart,
         texture = weapons/2handed/yourcart,
-        scale = 0.3,
+        scale = 1.00,
         invertX = true,
 
+        /* World placement (on ground) */
         attachment world
         {
             offset = 0.0000 0.0000 0.0000,
-            rotate = 0.0000 90.0000 0.0000,
+            rotate = 0.0000 0.0000 0.0000,
+        }
+
+        /* Primary hand (right) - attaches to Bip01_Prop1 bone */
+        attachment Bip01_Prop1
+        {
+            offset = -0.4800 0.4300 -0.0700,
+            rotate = 0.0 180.0 105.0,
+            scale = 0.9500,
+        }
+
+        /* Secondary hand (left) - attaches to Bip01_Prop2 bone */
+        attachment Bip01_Prop2
+        {
+            offset = -0.4800 0.4300 -0.0700,
+            rotate = 0.0 180.0 105.0,
+            scale = 0.9500,
         }
     }
 }
 ```
 
 **Important**: Models MUST be in the `Base` module, not your mod's module!
+
+**Important**: The hand bone attachments (`Bip01_Prop1`, `Bip01_Prop2`) control how the cart appears when held. Use the `SaucedCartsTweaker` in-game tool to adjust these values.
 
 ### Mesh Path Format
 
@@ -1089,7 +1105,7 @@ SaucedCartsTweaker.print()
 **Cause**: Registration code didn't run or failed.
 
 **Fix**:
-1. Check mod.info has `require=SaucedCarts`
+1. Check mod.info has `require=\SaucedCarts` (backslash is required for B42)
 2. Check init.lua path is correct: `media/lua/shared/YourMod/init.lua`
 3. Check for typos in `fullType` (must be "ModuleId.ItemName")
 4. Check console for error messages
@@ -1152,8 +1168,8 @@ name=Wheelbarrow Cart
 id=WheelbarrowCart
 description=Adds a rustic wheelbarrow cart.
 modversion=1.0.0
-versionmin=42.13.1
-require=SaucedCarts
+versionMin=42.13.1
+require=\SaucedCarts
 ```
 
 ### items_wheelbarrow.txt
@@ -1165,24 +1181,24 @@ module WheelbarrowCart
     item Wheelbarrow
     {
         DisplayCategory = Container,
-        Type = Container,
         DisplayName = Wheelbarrow,
+        ItemType = base:container,
+        Weight = 6.0,
         Icon = Wheelbarrow,
         Capacity = 40,
         WeightReduction = 80,
-        Weight = 6.0,
         RunSpeedModifier = 0.80,
+        RequiresEquippedBothHands = true,
         ConditionMax = 80,
         ConditionLowerChance = 30,
-        RequiresEquippedBothHands = true,
         CloseSound = CloseBag,
         OpenSound = OpenBag,
         PutInSound = PutItemInBag,
-        ReplaceInPrimaryHand = WheelbarrowModel holdingcartright,
-        ReplaceInSecondHand = WheelbarrowModel holdingcartleft,
-        StaticModel = WheelbarrowModel,
-        WorldStaticModel = WheelbarrowModel,
         Tags = SaucedCart,
+        StaticModel = Wheelbarrow,
+        WorldStaticModel = Wheelbarrow,
+        ReplaceInPrimaryHand = Wheelbarrow holdingcartright,
+        ReplaceInSecondHand = Wheelbarrow holdingcartleft,
     }
 }
 ```
@@ -1207,9 +1223,9 @@ local success, err = SaucedCarts.registerCart("WheelbarrowCart.Wheelbarrow", {
         { room = "greenhouse", chance = 30 },
     },
     visualModels = {
-        empty = "WheelbarrowModel",
-        partial = "WheelbarrowPartialModel",
-        full = "WheelbarrowFullModel",
+        empty = "Wheelbarrow",
+        partial = "WheelbarrowPartial",
+        full = "WheelbarrowFull",
     },
 })
 

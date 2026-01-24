@@ -3,92 +3,121 @@ SaucedCarts Addon Template
 ================================================================================
 
 This is a complete template for creating a SaucedCarts addon mod.
-Follow the steps below to create your own custom cart types.
 
 ================================================================================
-QUICK START (5 minutes)
+QUICK START
 ================================================================================
 
-1. Copy this entire ADDON_TEMPLATE folder to your PZ mods directory:
-   C:\Users\[YourName]\Zomboid\mods\
+1. Copy this entire ADDON_TEMPLATE folder to your Workshop folder:
+   C:\Users\[YourName]\Zomboid\Workshop\YourModName\
 
-2. Rename the folder to your mod name (e.g., "MyAwesomeCarts")
+2. Find and replace "MyCartAddon" with your mod name in ALL files:
+   - common/mod.info          (id and name fields)
+   - 42/media/scripts/*.txt   (module name, rename files too)
+   - 42/media/lua/shared/     (folder name)
+   - init.lua                 (all references)
 
-3. Find and replace "MyCartAddon" with your mod name in ALL files:
-   - mod.info (id field and name field)
-   - items_mycartaddon.txt (rename file + module name inside)
-   - models_mycartaddon.txt (rename file)
-   - init.lua (folder name + all references)
+3. Find and replace "MyCart" with your cart name:
+   - items_*.txt (item name)
+   - models_*.txt (model name)
+   - init.lua (fullType and registration)
 
-4. Replace the placeholder assets with your actual 3D model and textures
+4. Replace placeholder files with your assets:
+   - 42/media/models_X/weapons/2handed/mycart.fbx    (3D model)
+   - 42/media/textures/weapons/2handed/mycart.png    (model texture)
+   - 42/media/textures/Item_MyCart.png               (inventory icon)
 
 5. Test in-game:
-   - Enable both SaucedCarts and your addon in the mod list
-   - Start a game with debug mode
+   - Enable both SaucedCarts and your addon
    - Run: SaucedCartsDebug.listRegistered()
    - Your cart should appear in the list!
 
 ================================================================================
-FILE STRUCTURE
+FILE STRUCTURE (Workshop-style for Build 42)
 ================================================================================
 
-ADDON_TEMPLATE/
-├── mod.info                              <- Mod metadata (EDIT THIS)
-├── README.txt                            <- This file (delete when done)
-├── media/
-│   ├── scripts/
-│   │   ├── items_mycartaddon.txt         <- Item definitions (EDIT THIS)
-│   │   └── models_mycartaddon.txt        <- Model mappings (EDIT THIS)
-│   ├── lua/shared/MyCartAddon/
-│   │   └── init.lua                      <- Registration code (EDIT THIS)
-│   ├── textures/
-│   │   ├── PUT_INVENTORY_ICON_HERE.txt   <- Replace with Item_MyCart.png
-│   │   └── weapons/2handed/
-│   │       └── PUT_MODEL_TEXTURE_HERE.txt <- Replace with mycart.png
-│   └── models_X/weapons/2handed/
-│       └── PUT_FBX_MODEL_HERE.txt        <- Replace with mycart.fbx
+YourModName/
+├── README.txt                                    <- Delete when done
+├── common/
+│   └── mod.info                                  <- Mod metadata
+└── 42/
+    └── media/
+        ├── lua/shared/MyCartAddon/
+        │   └── init.lua                          <- Registration code
+        ├── scripts/
+        │   ├── items_mycartaddon.txt             <- Item definitions
+        │   └── models_mycartaddon.txt            <- Model mappings
+        ├── models_X/weapons/2handed/
+        │   └── mycart.fbx                        <- Your 3D model
+        └── textures/
+            ├── Item_MyCart.png                   <- Inventory icon (32x32)
+            └── weapons/2handed/
+                └── mycart.png                    <- Model texture
 
 ================================================================================
-ADDING MORE CART TYPES
+CRITICAL: NAMING MUST MATCH
 ================================================================================
 
-For each additional cart type, you need to add:
+These names must ALL match (case-sensitive):
 
-1. Item definition in items_*.txt (copy the "item MyCart" block)
-2. Model definition in models_*.txt (copy the "model MyCartModel" block)
-3. Registration in init.lua (copy the registerCart() call)
-4. New 3D model, texture, and inventory icon files
+  mod.info:           id=MyCartAddon
+  items_*.txt:        module MyCartAddon { item MyCart ... }
+  init.lua:           fullType = "MyCartAddon.MyCart"
+
+  items_*.txt:        StaticModel = MyCart,
+  models_*.txt:       model MyCart { ... }
+
+  items_*.txt:        Icon = MyCart,
+  textures:           Item_MyCart.png
 
 ================================================================================
 TESTING YOUR ADDON
 ================================================================================
 
-Debug commands (in Lua console with debug mode):
+Debug commands (Lua console, debug mode):
 
   SaucedCartsDebug.listRegistered()
-    - Lists all registered cart types (your cart should appear)
+    Lists all registered cart types - your cart should appear
 
   SaucedCartsDebug.checkRegistration("MyCartAddon.MyCart")
-    - Shows detailed info about your cart registration
+    Shows detailed info about your cart registration
 
   SaucedCartsDebug.spawnCart("MyCart")
-    - Spawns your cart at player position (if item definition is correct)
+    Spawns your cart at player position
 
   SaucedCartsDebug.giveCart("MyCart")
-    - Gives cart directly to player hands
+    Gives cart directly to player hands
 
-Common issues:
-- Cart not in list: Check init.lua registration and mod load order
-- Cart spawns but invisible: Check model paths in models_*.txt
-- Cart has no texture: Check texture paths in models_*.txt
-- "Unknown cart type": Check fullType matches module.itemname exactly
+  SaucedCartsTweaker.enable()
+    Real-time model positioning tool (adjust offset/rotate/scale)
+
+================================================================================
+COMMON MISTAKES
+================================================================================
+
+1. ITEM NOT IN DEBUG LIST
+   - Check module name in items_*.txt matches mod id
+   - Check item script has no syntax errors
+   - Try: instanceItem("MyCartAddon.MyCart") in console
+
+2. CART SPAWNS BUT INVISIBLE
+   - Model name must match between items_*.txt and models_*.txt
+   - Check mesh path is correct (folder/file|objectname)
+   - Verify FBX file exists at specified path
+
+3. CART HAS NO TEXTURE
+   - Check texture path in models_*.txt (no file extension)
+   - Verify PNG file exists at textures/weapons/2handed/
+
+4. REGISTRATION FAILS
+   - Check fullType format: "ModuleId.ItemName"
+   - Check SaucedCarts is enabled before your addon
 
 ================================================================================
 NEED HELP?
 ================================================================================
 
 - See ADDON_GUIDE.md for detailed documentation
-- See ASSET_REQUIREMENTS.md for 3D model and texture specifications
 - Check the SaucedCarts workshop page for updates
 
 ================================================================================

@@ -3,5 +3,5 @@ id=MyCartAddon
 description=Adds custom cart types using the SaucedCarts framework. <<CHANGE THIS>>
 poster=poster.png
 modversion=1.0.0
-versionmin=42.13.1
-require=SaucedCarts
+versionMin=42.13.1
+require=\SaucedCarts
